@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+    body {
+      display: flex;
+      
+      justify-content: center;
+      font-family: 'Open Sans', sans-serif;
+
+      color: #14213D;
+
+
+ 
+     
+      padding: 00px;
+    }
+    .page {
+      display: block;
+      padding: 00px;
+      border-radius: 0px;
+        
+}
+    .content-box {
+        display: block;
+        width: 350px;
+        margin-top: 120px;
+        padding: 0px;
+        border: 10px solid #ececec;
+        border-radius: 15px;
+        background-color: #ececec;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        font-size: large;
+    }
+
+    .pic-box {
+      display: block;
+        width: 350px;
+        padding: 10px;
+        border: 0px solid #ffffff;
+        border-radius: 0px;
+        background-color: #ffffff;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pic-box img {
+  max-width: 100%;
+  height: auto;
+  width: 350px;
+  align-items: center;
+}
+    .box {
+      display: inline-block;
+      margin: 10px;
+      text-align: center;
+      vertical-align: top;
+      transition: all 0.3s ease-in-out;
+    }
+    .box a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-decoration: none;
+      color: #822626;
+      
+      
+      transition: all 0.3s ease-in-out;
+    }
+    .box a:hover {
+      background-color: #dfdfdf;;
+    }
+    .sub-boxes {
+      
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+
+    }
+
+    .sub-boxes.show {
+      max-height: 500px; /* Set to a large enough value to accommodate the content */
+      max-width: 500px;
+
+    }
+    .sub-box {
+      margin-top: 5px;
+    }
+    .sub-box a {
+      
+      width: calc(30px*1);
+      height: calc(20px*1);
+      line-height: calc(20px*1);
+      font-size: calc(1em * .75);
+      text-decoration: none;
+      color: #4334ca;
+
+    }
+    .sub-box a:hover {
+      background-color: #dfdfdf;
+    }
+
+    /* Styles for when a main box is clicked */
+    .box.clicked a {
+        width: calc(100px * 1.0);
+        height: calc(20px * 1.0);
+        line-height: calc(20px * 1.0);
+        z-index: 1; /* Bring to front */
+        position:relative; /* Needed for z-index to work */
+        border: 0px solid #000000;
+        border-radius: 5px;
+    }
+    
+    .box:not(.clicked) a {
+        width: calc(90px * 1);
+        height: calc(20px * 1);
+        line-height: calc(20px * 1);
+        z-index:auto; /* Reset z-index */
+        position:relative; /* Needed for z-index to work */
+    }
+    
+     /* Styles for when a main box is clicked */
+     .box.clicked ~ .box:not(.clicked) {
+         transform : translateX(calc(80px * (1.5 -1)));
+     }
+
+     /* Reset styles when no main box is clicked */
+     .box:not(.clicked) ~ .box:not(.clicked) {
+         transform : translateX(0);
+     }
+   </style>
+</head>
+<body>
+	<section>
+		
+			<div class="content-box">
+				<h1 class="body">James M. Perry</h1>
+				<div class="box">
+					<a href="[Link%20URL]" onclick="toggleSubBoxes(event, 'link1SubBoxes')" onmouseover="showImage('images/Slide1.jpg')">Science</a>
+					<div class="sub-boxes" id="link1SubBoxes">
+						<div class="sub-box">
+							<a href="Images/Science_CV.pdf">C.V.</a>
+						</div>
+						<div class="sub-box">
+							<a href="https://scholar.google.com/citations?user=gNKWvbUAAAAJ&hl=en&oi=ao">Publications</a>
+						</div>
+						<div class="sub-box">
+							<a href="[Link%20URL]">Sublink</a>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<a href="[Link%20URL]" onclick="toggleSubBoxes(event, 'link2SubBoxes')" onmouseover="showImage('Images/Slide2.jpg')">Music</a>
+					<div class="sub-boxes" id="link2SubBoxes">
+						<div class="sub-box">
+							<a href="Images/music_cv.pdf" target="_blank">C.V.</a>
+						</div>
+						<div class="sub-box">
+							<a href="card.html">Samples</a>
+						</div>
+						<div class="sub-box">
+							<a href="[Link%20URL]" onmouseover="showImage('Images/Slide2.jpg')">Sheet Music</a>
+						</div>
+					</div>
+				</div>
+				<div class="box">
+					<a href="[Link%20URL]" onclick="toggleSubBoxes(event, 'link3SubBoxes')" onmouseover="showImage('images/Slide3.jpg')">Design</a>
+					<div class="sub-boxes" id="link3SubBoxes">
+						<div class="sub-box">
+							<a href="Images/Ahmadi2023.pdf">Journal Cover</a>
+						</div>
+						<div class="sub-box">
+							<a href="[Link%20URL]">Microfluidics</a>
+						</div>
+						<div class="sub-box">
+							<a href="images/Slide3.jpg" onmouseover="showImage('images/Slide3.jpg')">Guitar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+      
+		
+    <div class="pic-box"><img alt="" id="box-image" src=""></div>
+
+    
+
+
+	</section>
+
+<script>
+function toggleSubBoxes(event, id) {
+event.preventDefault();
+
+// Close any other open sub-boxes
+var allSubBoxes = document.querySelectorAll('.sub-boxes');
+for (var i = 0; i < allSubBoxes.length; i++) {
+if (allSubBoxes[i].id !== id) {
+allSubBoxes[i].classList.remove('show');
+}
+}
+
+// Toggle the clicked sub-boxes
+var subBoxes = document.getElementById(id);
+if (subBoxes.classList.contains('show')) {
+subBoxes.classList.remove('show');
+} else {
+subBoxes.classList.add('show');
+}
+
+// Toggle the clicked class on the main box
+var mainBox = event.target.parentNode;
+if (mainBox.classList.contains('clicked')) {
+mainBox.classList.remove('clicked');
+} else {
+// Remove clicked class from any other main boxes
+var allMainBoxes = document.querySelectorAll('.box');
+for (var i = 0; i < allMainBoxes.length; i++) {
+allMainBoxes[i].classList.remove('clicked');
+}
+mainBox.classList.add('clicked');
+}
+}
+
+function showImage(imageSrc) {
+    document.getElementById('box-image').src = imageSrc;
+  }
+
+</script>
+</body>
+</html>
